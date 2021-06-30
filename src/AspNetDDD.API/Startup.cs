@@ -1,20 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AspNetDDD.Domain;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using AspNetDDD.Infrastructure;
 using AspNetDDD.Service;
-using Microsoft.EntityFrameworkCore;
+using AspNetDDD.Service.AutoMapper;
+using AspNetDDD.Domain.Interfaces.Repository;
+using AspNetDDD.Domain.Interfaces.Service;
 
 namespace AspNetDDD.API
 {
@@ -29,19 +23,16 @@ namespace AspNetDDD.API
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
-
+        {         
             services.AddControllers();
             services.AddDbContext<MySqlContext>();
-            
+
             // Dependency Injection
-            /*services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
-            services.AddScoped<IBooksBusiness, BooksBusinessImplementation>();
-      
-            services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));*/
-            services.AddScoped<UserRepository>();
-            services.AddScoped(typeof(IRepository<>), typeof(UserRepository));
-            services.AddScoped(typeof(IService<>));
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserRepository, UserRepository>();
+
+            // Auto Mapper Configurations
+            services.AddAutoMapper(typeof(MappingProfile));
 
             services.AddSwaggerGen(c =>
             {

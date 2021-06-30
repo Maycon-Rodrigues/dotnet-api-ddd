@@ -9,6 +9,9 @@ namespace AspNetDDD.Service.AutoMapper
         {
             CreateMap<User, UserViewModel>();
             CreateMap<UserViewModel, User>();
+
+            // CreateMap<UserViewModel, User>()
+            //     .ConstructUsing(src => new User(src.Name, src.Email, src.Password));
         }
     }
 }

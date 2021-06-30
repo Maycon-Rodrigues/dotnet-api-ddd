@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AspNetDDD.Domain;
+using AspNetDDD.Domain.Interfaces.Repository;
 using Microsoft.EntityFrameworkCore;
 
 namespace AspNetDDD.Infrastructure
 {
-    public class UserRepository : IRepository<User>
+    public class UserRepository : IUserRepository
     {
         private readonly MySqlContext _context;
 

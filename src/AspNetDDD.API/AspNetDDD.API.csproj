@@ -11,6 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AspNetDDD.Infrastructure\AspNetDDD.Infrastructure.csproj" />
     <ProjectReference Include="..\AspNetDDD.Service\AspNetDDD.Service.csproj" />
+    <ProjectReference Include="..\AspNetDDD.Domain\AspNetDDD.Domain.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,6 @@
-using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using AspNetDDD.Domain;
-using AspNetDDD.Service;
+using AspNetDDD.Domain.Interfaces.Service;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AspNetDDD.API.Controllers
@@ -10,17 +9,22 @@ namespace AspNetDDD.API.Controllers
     [Route("v1/api/")]
     public class UserController : ControllerBase
     {
-        private readonly UserService _userService;
+        private readonly IUserService _userService;
 
-        public UserController(UserService userService)
+        public UserController(IUserService userService)
         {
             _userService = userService;
         }
 
         [HttpGet("users")]
-        public Task<IEnumerable<UserViewModel>> GetAllUsers()
+        public async Task<IActionResult> GetAllUsers()
         {
-            return _userService.GetAll();
+            var users = await _userService.GetAll();
+            if (users.Any())
+            {
+                return Ok(users);
+            }
+            return NotFound();
         }
     }
 }
