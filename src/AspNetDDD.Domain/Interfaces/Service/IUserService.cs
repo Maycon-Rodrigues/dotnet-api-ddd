@@ -11,7 +11,7 @@ namespace AspNetDDD.Domain.Interfaces.Service
         Task<UserViewModel> GetById(int id);
         Task<UserViewModel> Create(UserViewModel entity);
         Task<UserViewModel> Update(UserViewModel entity);
-        void Delete(int id);
+        Task Delete(int id);
 
     }
 }

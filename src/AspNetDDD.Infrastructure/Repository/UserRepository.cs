@@ -34,14 +34,17 @@ namespace AspNetDDD.Infrastructure
 
         public async Task<User> Update(User entity)
         {
-            _context.Update(entity);
+            var user = await _context.Users.FirstOrDefaultAsync(user => user.Id.Equals(entity.Id));
+            _context.Entry(user).CurrentValues.SetValues(entity);
             await _context.SaveChangesAsync();
-            return entity;
+            return user;
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            _context.Remove(id);
+            var user = await _context.Users.FirstOrDefaultAsync(user => user.Id.Equals(id));
+            _context.Remove(user);
+            await _context.SaveChangesAsync();
         }
     }
 }

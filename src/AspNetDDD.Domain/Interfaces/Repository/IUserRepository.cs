@@ -9,7 +9,7 @@ namespace AspNetDDD.Domain.Interfaces.Repository
         Task<User> GetById(int id);
         Task<User> Create(User entity);
         Task<User> Update(User entity);
-        void Delete(int id);
+        Task Delete(int id);
 
     }
 }

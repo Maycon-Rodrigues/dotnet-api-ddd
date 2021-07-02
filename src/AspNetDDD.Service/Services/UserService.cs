@@ -25,26 +25,29 @@ namespace AspNetDDD.Service
             return _mapper.Map<IEnumerable<User>, IEnumerable<UserViewModel>>(users);
         }
 
-        public Task<UserViewModel> GetById(int id)
+        public async Task<UserViewModel> GetById(int id)
         {
-            // var user = await _userRepository.GetById(id);
-            // return _mapper.Map<User, UserViewModel>(user);
-            throw new System.NotImplementedException();
+            var user = await _userRepository.GetById(id);
+            return _mapper.Map<User, UserViewModel>(user);
         }
 
-        public Task<UserViewModel> Create(UserViewModel entity)
+        public async Task<UserViewModel> Create(UserViewModel entity)
         {
-            throw new System.NotImplementedException();
+            var user = _mapper.Map<User>(entity);
+            user = await _userRepository.Create(user);
+            return _mapper.Map<UserViewModel>(user);
         }
 
-        public Task<UserViewModel> Update(UserViewModel entity)
+        public async Task<UserViewModel> Update(UserViewModel entity)
         {
-            throw new System.NotImplementedException();
+            var user = _mapper.Map<User>(entity);
+            user = await _userRepository.Update(user);
+            return _mapper.Map<UserViewModel>(user);
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            throw new System.NotImplementedException();
+            await _userRepository.Delete(id);
         }
     }
 }
