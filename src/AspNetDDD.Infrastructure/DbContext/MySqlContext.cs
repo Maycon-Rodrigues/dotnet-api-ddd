@@ -12,7 +12,11 @@ namespace AspNetDDD.Infrastructure
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql(serverVersion: serverVersion, connectionString: connectionString);
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseMySql(serverVersion: serverVersion, connectionString: connectionString,
+                    mySqlOptionsAction: builder => builder.EnableRetryOnFailure());
+            }
         }
     }
 }
