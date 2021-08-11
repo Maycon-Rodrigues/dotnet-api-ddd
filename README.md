@@ -7,6 +7,8 @@ Learning about DDD on dotnet
 
 - **.Net 5**
 
+- **EF Core**
+
 - **MySql**
 
   
@@ -23,6 +25,9 @@ $ git clone https://github.com/Maycon-Rodrigues/dotnet-api-ddd.git
 ```bash
 # Go into the repository
 $ cd dotnet-api-ddd
+
+# Creating the Database
+$ dotnet ef database update
 
 # Run the app
 $ dotnet run
